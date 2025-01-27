@@ -22,25 +22,21 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        player_input()
-        update_game()
-        draw_game(screen)
+        update_game(player, dt)
+        draw_game(screen, player)
 
-        player.draw(screen)
-
-        pygame.display.flip()
+        
         dt = clock.tick(60) / 1000
 
-def player_input():
-    pass
+
+def update_game(player, dt):
+    player.update(dt)
 
 
-def update_game():
-    pass
-
-
-def draw_game(screen):
+def draw_game(screen, player):
     screen.fill((0, 0, 0))
+    player.draw(screen)
+    pygame.display.flip()
 
 
 if __name__ == "__main__":
