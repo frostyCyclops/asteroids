@@ -13,6 +13,11 @@ def main():
     clock = pygame.time.Clock()
     dt = 0
 
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updatable, drawable)
+
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
     while True:
@@ -22,20 +27,24 @@ def main():
                 pygame.quit()
                 sys.exit()
 
-        update_game(player, dt)
-        draw_game(screen, player)
+        update_game(updatable, dt)
+        draw_game(screen, drawable)
 
         
         dt = clock.tick(60) / 1000
 
 
-def update_game(player, dt):
-    player.update(dt)
+def update_game(updatable, dt):
+    for sprite in updatable:
+        sprite.update(dt)
 
 
-def draw_game(screen, player):
+def draw_game(screen, drawable):
     screen.fill((0, 0, 0))
-    player.draw(screen)
+    
+    for sprite in drawable:
+        sprite.draw(screen)
+    
     pygame.display.flip()
 
 
