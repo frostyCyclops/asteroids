@@ -36,6 +36,12 @@ def main():
                 sys.exit()
 
         update_game(updatable, dt)
+
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                print("Game Over!")
+                sys.exit()
+
         draw_game(screen, drawable)
 
         
